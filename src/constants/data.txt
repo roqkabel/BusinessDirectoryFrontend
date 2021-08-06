@@ -1,0 +1,22 @@
+
+      {
+        "name": "Vanguard Assurance Company Limited",
+        "address": "25 Independence Ave, Accra",
+        "website": "vanguardassurance.com",
+        "phone": "+233556620111",
+        "plus_code": "HR73+CV Accra",
+        "category": "Insurance company",
+        "review_count": 341,
+        "rating": 4,
+        "image": "https://lh5.googleusercontent.com/p/AF1QipNGahJP2lXWZ3WgpY0_a2cRyi_wV_iQxfe8-Luj=w493-h240-k-no",
+        "claimed": "YES",
+        "emails": "",
+        "facebook": "",
+        "instagram": "",
+        "linkedin": "",
+        "twitter": "",
+        "youtube": "",
+        "Latitude": 5.5636111,
+    "Longitude": -0.1952778
+      },
+     
