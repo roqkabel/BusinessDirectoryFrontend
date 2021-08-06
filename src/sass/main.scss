@@ -76,11 +76,16 @@ input {
     }
 }
 
-.search-box {
+.searchBox-content {
     position: sticky;
     top: 70px;
     // // width: 100%;
     height: 240px;
     background-color: #fff;
     // z-index: 1;
+}
+
+.css-1gtu0rj-indicatorContainer,
+.css-tlfecz-indicatorContainer {
+    display: none !important;
 }

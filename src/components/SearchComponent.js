@@ -40,24 +40,10 @@ const SearchComponent = () => {
               value,
               onChange: setValue,
               onSelect: handleSelect(value),
-              styles: {
-                input: (provided) => ({
-                  ...provided,
-                  color: 'blue',
-                }),
-                option: (provided) => ({
-                  ...provided,
-                  color: 'blue',
-                }),
-                singleValue: (provided) => ({
-                  ...provided,
-                  color: 'blue',
-                }),
-              }
             }}
           />
         </div>
-        {/* <input className="ml-2" type="submit" value="Search" /> */}
+        <input className="ml-2" type="submit" value="Search" />
       </div>
     </div>
   );
