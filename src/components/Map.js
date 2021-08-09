@@ -22,14 +22,14 @@ const defaultOptions = {
   gestureHandling: "greedy",
 };
 
-const  MapComponent = ({children, ApiUrl}) => {
+const  MapComponent = ({children, ApiUrl, centerPin}) => {
   return (
     <LoadScript
     googleMapsApiKey={`${ApiUrl}`}
     >
       <GoogleMap
          mapContainerStyle={containerStyle}
-         center={center}
+         center={centerPin ?? center}
          zoom={14}
          options={defaultOptions}
       >
