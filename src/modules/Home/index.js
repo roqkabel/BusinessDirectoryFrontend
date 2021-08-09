@@ -28,6 +28,8 @@ const index = () => {
   const [currentPage, setcurrentPage] = useState(1);
   const [currentOffset, setCurrentOffset] = useState(6);
 
+  const [data, setData] = useState([])
+
   // Pagination Function
   const onPageChange = (current, size) => {
     setcurrentPage(current);
@@ -39,6 +41,9 @@ const index = () => {
 
       // do map change filter here
       setrawData(res.data);
+      setData([...res.data])
+      setcurrentPage(1)
+      return true
     } catch (error) {
       console.log(error);
     }
@@ -58,11 +63,20 @@ const index = () => {
 
   // Filter Functions
   const handleFilter = async (values) => {
-    const res = await rawData.filter((data) =>
-      values.includes(data.category)
-    );
-    setrawData(res);
-    console.log(res);
+
+    let newData = []
+    
+      data.filter((data) =>{
+
+        if(values.includes(data.category)){
+          newData.push(data)
+        }
+        return data
+      });
+        setcurrentPage(1)
+        setrawData([...newData]);
+
+    // console.log(res);
   };
 
   
@@ -70,12 +84,14 @@ const index = () => {
 
   // All Categories Function
   const handleAllCategories = () => {
-    let result = rawData.slice(
-      currentOffset * currentPage - currentOffset,
-      currentOffset * currentPage
-    );
-    setBusinessList([...result]);
-    console.log(result);
+    setrawData([...data]);
+
+    // let result = rawData.slice(
+    //   currentOffset * currentPage - currentOffset,
+    //   currentOffset * currentPage
+    // );
+    // setBusinessList([...result]);
+    // console.log(result);
   };
 
   // Header Animation
