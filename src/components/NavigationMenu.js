@@ -6,7 +6,6 @@ import { NavLink } from "./ButtonComponent";
 import SearchComponent from "./SearchComponent";
 
 const NavigationMenu = (props) => {
-console.log(props)
   return (
     <div className={`navigation ${props.show && "nav-white"} ${props.directory && "nav-bar"}`}>
       {/* Navigation Bar */}
