@@ -25,7 +25,7 @@ const defaultOptions = {
 const  MapComponent = ({children, ApiUrl}) => {
   return (
     <LoadScript
-    googleMapsApiKey={`${ApiUrl}`}
+    googleMapsApiKey={`${GOOGLE_MAP_API_KEY}`}
     >
       <GoogleMap
          mapContainerStyle={containerStyle}

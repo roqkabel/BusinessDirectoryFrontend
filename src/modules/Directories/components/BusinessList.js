@@ -42,7 +42,7 @@ const onSearch = async value => {
 
   return (
     <div className="">
-   <div className="search-box">
+   <div className="searchBox-content">
    <div className="list-header container px-5 pt-5 pb-3">
         <div className="d-flex justify-content-between align-items-center">
           <p>

@@ -79,7 +79,7 @@ const Company = () => {
       <NavigationMenu directory />
       <main className="company">
         <section className="map-section">
-          <Map ApiUrl={`${GOOGLE_MAP_API_KEY}`}>
+          <Map>
             <MarkerContent />
           </Map>
         </section>
