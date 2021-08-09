@@ -8,11 +8,17 @@ import axios from "axios";
 import { Pagination } from 'antd';
 import { Input, Space } from 'antd';
 import { AudioOutlined } from '@ant-design/icons';
+import { useDebounce } from "use-debounce";
+
+
 
 const { Search } = Input;
 
 const BusinessList = (props) => {
   const [listData, setListData] = useState('')
+  const [searchText, setsearchText] = useState("");
+
+	const [deboucedValue] = useDebounce(searchText, 500);
   
   const router = useRouter();
 
@@ -26,10 +32,14 @@ const BusinessList = (props) => {
 
 
 
+
 const onSearch = async value => {
   try {
-    const res = await listData.filter(item => value.includes(item.name))
-    setListData(res)
+
+    props.setSearchvalue(value)
+    // setsearchText(value)
+    // const res = await listData.filter(item => value.includes(item.name))
+    // setListData(res)
   } catch (error) {
     console.log(error)
   }
