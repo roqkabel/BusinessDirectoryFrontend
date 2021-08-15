@@ -120,8 +120,8 @@ const GetInfo = ({ id, info, distance, duration }) => (
 export const GetDirectionCard = (props) => {
   const [data, setData] = useState("");
   const getDirections = useGetDirections({
-    originId: "ChIJmVKSBp2d3w8RyX-yeqcKG5w",
-    destinationId: props?.directions?.place_id,
+    originId: props?.origin?.lat + "," + props?.origin?.lng,
+    destinationId: props?.directions?.geometry?.location.lat + "," + props?.directions?.geometry?.location.lng,
   });
 
   useEffect(() => {

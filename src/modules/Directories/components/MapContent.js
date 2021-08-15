@@ -23,6 +23,7 @@ const defaultOptions = {
   streetViewControl: true,
   zoomControl: "true",
   gestureHandling: "greedy",
+  styles: MapStyle
 };
 
 
@@ -67,13 +68,13 @@ const MapComponent = (props) => {
                 setSelectedCompany(data);
               }}
               animation={2}
-              // icon={{
-              //   url: "https://img.icons8.com/glyph-neue/64/000000/marker.png",
-              //   scaledSize: new window.google.maps.Size(
-              //     getSize(index),
-              //     getSize(index)
-              //   ),
-              // }}
+              icon={{
+                url: "https://img.icons8.com/glyph-neue/64/000000/marker.png",
+                scaledSize: new window.google.maps.Size(
+                  getSize(index),
+                  getSize(index)
+                ),
+              }}
             />
           );
         })}

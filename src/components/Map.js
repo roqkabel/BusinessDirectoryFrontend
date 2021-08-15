@@ -1,5 +1,6 @@
 import React from 'react'
 import { GoogleMap, LoadScript } from '@react-google-maps/api';
+import MapStyle from '../modules/Directories/components/mapStyle';
 
 const containerStyle = {
   width: '100%',
@@ -19,6 +20,7 @@ const defaultOptions = {
   streetViewControl: false,
   zoomControl: "true",
   gestureHandling: "greedy",
+  styles: MapStyle
 };
 
 const  MapComponent = ({children, ApiUrl, centerPin}) => {
