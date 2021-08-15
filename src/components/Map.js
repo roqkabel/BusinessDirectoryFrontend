@@ -1,6 +1,5 @@
 import React from 'react'
 import { GoogleMap, LoadScript } from '@react-google-maps/api';
-import { GOOGLE_MAP_API_KEY } from '@/constants/global';
 
 const containerStyle = {
   width: '100%',
@@ -25,12 +24,12 @@ const defaultOptions = {
 const  MapComponent = ({children, ApiUrl, centerPin}) => {
   return (
     <LoadScript
-    googleMapsApiKey={`${GOOGLE_MAP_API_KEY}`}
+    googleMapsApiKey={`${process.env.googleApisKey}`}
     >
       <GoogleMap
          mapContainerStyle={containerStyle}
          center={centerPin ?? center}
-         zoom={14}
+         zoom={12}
          options={defaultOptions}
       >
         { /* Child components, such as markers, info windows, etc. */ }

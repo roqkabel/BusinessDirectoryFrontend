@@ -1,17 +1,7 @@
-const { PHASE_DEVELOPMENT_SERVER } = require('next/constants')
-
-module.exports = (phase, { defaultConfig }) => {
-  if (phase === PHASE_DEVELOPMENT_SERVER) {
-    return {
-      /* development only config options here */
-    }
+module.exports = {
+  env: {
+    googleApisKey: 'AIzaSyBpGV3ijFW_A3ZG7tT9kF3ncrHZ9MhY8dE',
+    // DirectionApiKey: 'AIzaSyBDfW7jvSxY7puFspFMKjai3MwPou0smvA'
   }
 
-  return {
-    /* config options for all phases except development here */
-    images: {
-      domains: ['https://streetviewpixels-pa.googleapis.com'],
-    },
-  }
-  
 }

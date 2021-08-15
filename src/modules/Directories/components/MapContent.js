@@ -16,7 +16,7 @@ const center = {
 };
 
 const defaultOptions = {
-  scrollwheel: true,
+  scrollwheel: false,
   fullscreenControl: false,
   mapTypeControl: false,
   panControl: false,
@@ -41,7 +41,7 @@ const MapComponent = (props) => {
 
   return (
     <LoadScript
-      googleMapsApiKey={`${GOOGLE_MAP_API_KEY}`}
+      googleMapsApiKey={`${process.env.googleApisKey}`}
     >
       <GoogleMap
         mapContainerStyle={containerStyle}

@@ -49,7 +49,7 @@ const Company = () => {
 
   useEffect(() => {
     getDetails(
-      `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&key=${GOOGLE_MAP_API_KEY}`
+      `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&key=${process.env.googleApisKey}`
     );
   }, [placeId]);
 

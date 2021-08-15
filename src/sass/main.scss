@@ -13,10 +13,11 @@
     margin: 0 auto;
 }
 
-// .activeClass {
-//     background-color: #004BA8 !important;
-//     color: #fff;
-// }
+.activeClass {
+    background-color: #004BA8 !important;
+    color: #fff;
+    text-decoration: none !important;
+}
 
 h1, h2, h3, h5 {
     margin-top: 0;
@@ -89,3 +90,10 @@ input {
 .css-tlfecz-indicatorContainer {
     display: none !important;
 }
+
+// .get-directions-box {
+    // padding: 9px 16px;
+    // border-radius: 6px;
+    // -webkit-box-shadow: 0 0 6px rgb(0 0 0 / 20%);
+    // box-shadow: 0 0 6px rgb(0 0 0 / 20%);
+// }
