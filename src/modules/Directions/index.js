@@ -3,42 +3,56 @@ import { useState } from "react";
 import { DirectionsRenderer, DirectionsService } from "@react-google-maps/api";
 import useGetUserLocation from "src/hooks/useGetUserLocation";
 import { useRouter } from "next/router";
-import useGetPlaceDetails from "src/hooks/useGetPlaceDetails";
+import { useGetPlaceDetails } from "src/hooks/useGetPlaceDetails";
 import { useEffect } from "react";
+import NavigationMenu from "@/components/NavigationMenu";
+import { GetDirectionCard } from "./Components/GetDirectionCard";
+import { Spin } from 'antd';
 
 const index = () => {
-  const [directions, setDirections] = useState(null);
+  const [directions, setDirections] = useState({});
   const [travelMode, setTravelMode] = useState("DRIVING");
-  const [origin, setOrigin] = useState({ lat: 6.5244, lng: 3.3792 });
-  const [destination, setDestination] = useState({ lat: 6.4667, lng: 3.45 });
+  const [origin, setOrigin] = useState({});
+  const [destination, setDestination] = useState({});
   const [directionResponse, setDirectionResponse] = useState(null);
 
   const router = useRouter();
 
   const useLocation = useGetUserLocation();
-  const placeDetails = useGetPlaceDetails({
-    place_id: router.query.placeId,
-    apiKey: "AIzaSyBpGV3ijFW_A3ZG7tT9kF3ncrHZ9MhY8dE",
+
+  const { data, isLoading, isError } = useGetPlaceDetails({
+    place_id: router.query.id,
+    apiKey: `${process.env.googleApisKey}`,
   });
 
   useEffect(() => {
-    setDestination(placeDetails?.geometry?.location);
-  }, [placeDetails?.geometry?.location]);
+    setDestination({ ...data?.geometry?.location });
+  }, [data?.geometry?.location]);
 
   useEffect(() => {
-    setOrigin(useLocation);
+    setDirections({ ...data });
+  }, [data]);
+
+  useEffect(() => {
+    setOrigin({ ...useLocation });
   }, [useLocation]);
 
   const directionsCallback = (value) => {
     setDirectionResponse(value);
   };
 
+  if (isLoading) return <Spin size="large" />;
+  if (isError) return <div>Error</div>;
   return (
     <div>
-      <section style={{ height: "100vh" }}>
+      <NavigationMenu directory />
+      <section style={{ height: "100vh", marginTop: 70 }}>
+        <div className="">
+          <GetDirectionCard directions={directions} origin={origin} />
+        </div>
         <MapComponent
           centerPin={origin}
-          ApiUrl={"AIzaSyBpGV3ijFW_A3ZG7tT9kF3ncrHZ9MhY8dE"}
+          ApiUrl={`${process.env.googleApisKey}`}
         >
           <>
             <DirectionsRenderer

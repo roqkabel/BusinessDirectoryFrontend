@@ -1,5 +1,4 @@
 export const API_URL = process.env.NEXT_PUBLIC_API_URL
-export const GOOGLE_MAP_API_KEY = 'AIzaSyAmSP9PYDS--WyGzopcQqRNg3bOKgHe6Cc'
 
 // Values
 export const BusinessValues = [

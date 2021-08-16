@@ -13,10 +13,10 @@ export const PAGE_FORGET_PASSWORD = '/account/forgot-password'
 
 
 // Google Map Url
-export const GOOGLE_MAP_URL = `https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${GOOGLE_MAP_API_KEY}`;
-export const GOOGLE_RESULTS_URL = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=private+firms+in+accra+central/@5.619260,-0.274840&data=!3m1!4b1&key=${GOOGLE_MAP_API_KEY}`
-export const GOOGLE_MAP_PLACE_ID = `https://maps.googleapis.com/maps/api/place/details/json?place_id=ChIJFb-CZZCQ3w8RMqE6W4_kuHg&key=${GOOGLE_MAP_API_KEY}`
-export const GOOGLE_DIRECTION_URL= ''
+// export const GOOGLE_MAP_URL = `https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${GOOGLE_MAP_API_KEY}`;
+// export const GOOGLE_RESULTS_URL = `https://maps.googleapis.com/maps/api/place/textsearch/json?query=private+firms+in+accra+central/@5.619260,-0.274840&data=!3m1!4b1&key=${GOOGLE_MAP_API_KEY}`
+// export const GOOGLE_MAP_PLACE_ID = `https://maps.googleapis.com/maps/api/place/details/json?place_id=ChIJFb-CZZCQ3w8RMqE6W4_kuHg&key=${GOOGLE_MAP_API_KEY}`
+// export const GOOGLE_DIRECTION_URL= ''
 
 
 

@@ -2,14 +2,15 @@ import { BsDot } from "react-icons/bs";
 import { GoLocation } from "react-icons/go";
 import styled from "styled-components";
 import { NavLink } from "./ButtonComponent";
-import Image from "next/image";
-import Picture from "../../public/assets/list.jpg";
-import Star from "../../public/assets/star-on.png";
-import { FcServices } from "react-icons/fc";
+
 import Link from "next/link";
 import { FiPhoneCall } from "react-icons/fi";
-import { AiOutlineMail } from "react-icons/ai";
 import ReactStars from "react-rating-stars-component";
+
+import {  AiOutlineMail } from "react-icons/ai";
+
+
+
 
 const CardWrapper = styled.div`
   border: none;
@@ -278,3 +279,4 @@ const AuthCardWrapper = styled.div`
 export const AuthCard = ({ children }) => {
   return <AuthCardWrapper>{children}</AuthCardWrapper>;
 };
+

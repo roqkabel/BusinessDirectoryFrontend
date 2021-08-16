@@ -1,9 +1,10 @@
 import NavigationMenu from "@/components/NavigationMenu";
 import axios from "axios";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import BusinessList from "./components/BusinessList";
 import MapContent from "./components/MapContent";
 import { useDebounce } from "use-debounce";
+import useSWR from 'swr'
 
 const index = () => {
   const [currentIndex, setcurrentIndex] = useState(2);
@@ -29,17 +30,23 @@ const index = () => {
     console.log(cord);
   };
 
-  const getListData = async (url) => {
-    try {
-      const res = await axios.get(url);
+  // const getListData = async (url) => {
+  //   try {
+  //     const res = await axios.get(url);
 
-      // do map change filter here
-      setrawData(res.data);
-      setActualData([...res.data]);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  //     // do map change filter here
+  //     setrawData(res.data);
+  //     setActualData([...res.data]);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  const fetcher = url => axios.get(url).then(res => {
+    
+    setrawData(res.data);
+    setActualData([...res.data]);
+  })
 
   // set search value.
   const setSearchvalue = useCallback((value) => {
@@ -78,6 +85,10 @@ const index = () => {
     }
   }, [deboucedValue]);
 
+  const { data, error } = useSWR('/Data/Data.json', fetcher)
+ 
+  // console.log(data)
+
   // const handleSearchList = (value) => {
 
   // }
@@ -89,9 +100,13 @@ const index = () => {
     setBusinessList([...result]);
   }, [rawData, currentPage]);
 
-  useEffect(() => {
-    getListData("/Data/Data.json");
-  }, []);
+  // useEffect(() => {
+  //   // getListData("/Data/Data.json");
+   
+  //   // setrawData(res.data);
+  //   // setActualData([...res.data]);
+   
+  // }, []);
   const callIndex = useCallback((index) => setcurrentIndex(index), 0);
 
   const handleIndex = (index) => {

@@ -7,12 +7,23 @@ import { BiBuildings, BiCheckDouble, BiSearchAlt } from "react-icons/bi";
 import { useEffect, useState } from "react";
 import { DIRECTORIES_PAGE } from "@/constants/routes";
 import axios from "axios";
-import { BrewyValues, BusinessValues, ConstValues, InsuranceValues, LegalValues, ManuValues, SecurityValues, SoftwareValues, SuppliesValues, WasteValues } from "@/constants/global";
+import {
+  BrewyValues,
+  BusinessValues,
+  ConstValues,
+  InsuranceValues,
+  LegalValues,
+  ManuValues,
+  SecurityValues,
+  SoftwareValues,
+  SuppliesValues,
+  WasteValues,
+} from "@/constants/global";
 
-const Categories = ({ children, isActive }) => {
+const Categories = ({ children }) => {
   return (
     <ul>
-      <li className={isActive && "activeClass"}>{children}</li>
+      <li>{children}</li>
     </ul>
   );
 };
@@ -20,6 +31,7 @@ const Categories = ({ children, isActive }) => {
 const index = () => {
   const [show, setShow] = useState(false);
   const [currentIndex, setcurrentIndex] = useState(2);
+  const [isActive, setIsActive] = useState(false);
 
   const [businessList, setBusinessList] = useState([]);
   const [rawData, setrawData] = useState([]);
@@ -28,7 +40,7 @@ const index = () => {
   const [currentPage, setcurrentPage] = useState(1);
   const [currentOffset, setCurrentOffset] = useState(6);
 
-  const [data, setData] = useState([])
+  const [data, setData] = useState([]);
 
   // Pagination Function
   const onPageChange = (current, size) => {
@@ -41,9 +53,9 @@ const index = () => {
 
       // do map change filter here
       setrawData(res.data);
-      setData([...res.data])
-      setcurrentPage(1)
-      return true
+      setData([...res.data]);
+      setcurrentPage(1);
+      return true;
     } catch (error) {
       console.log(error);
     }
@@ -63,35 +75,24 @@ const index = () => {
 
   // Filter Functions
   const handleFilter = async (values) => {
+    let newData = [];
 
-    let newData = []
-    
-      data.filter((data) =>{
-
-        if(values.includes(data.category)){
-          newData.push(data)
-        }
-        return data
-      });
-        setcurrentPage(1)
-        setrawData([...newData]);
+    data.filter((data) => {
+      if (values.includes(data.category)) {
+        newData.push(data);
+      }
+      return data;
+    });
+    setcurrentPage(1);
+    setrawData([...newData]);
+    setIsActive(true);
 
     // console.log(res);
   };
 
-  
-
-
   // All Categories Function
   const handleAllCategories = () => {
     setrawData([...data]);
-
-    // let result = rawData.slice(
-    //   currentOffset * currentPage - currentOffset,
-    //   currentOffset * currentPage
-    // );
-    // setBusinessList([...result]);
-    // console.log(result);
   };
 
   // Header Animation
@@ -220,41 +221,62 @@ const index = () => {
             <NavLink href={DIRECTORIES_PAGE} name="View All" isBrowse />
           </div>
           <div className="categories-buttons max-width-container mt-4">
-            <Categories isActive>
-              <a onClick={() => handleAllCategories()}>All Categories</a>
+            <Categories>
+              <a
+                className="activeClass"
+                onClick={() => handleAllCategories()}
+              >
+                All Categories
+              </a>
             </Categories>
             <Categories>
-              <a onClick={() => handleFilter(BusinessValues)}>
+              <a
+                onClick={() => handleFilter(BusinessValues)}
+              >
                 {" "}
                 Business & Finance
               </a>
             </Categories>
             <Categories>
-              <a onClick={() => handleFilter(ManuValues)}>Manufacturing Services</a>
+              <a onClick={() => handleFilter(ManuValues)}>
+                Manufacturing Services
+              </a>
             </Categories>
             <Categories>
-              <a onClick={() => handleFilter(SoftwareValues)}>Software Services</a>
+              <a onClick={() => handleFilter(SoftwareValues)}>
+                Software Services
+              </a>
             </Categories>
-            <Categories >
+            <Categories>
               <a onClick={() => handleFilter(LegalValues)}>Legal Services</a>
             </Categories>
-            <Categories >
+            <Categories>
               <a onClick={() => handleFilter(BrewyValues)}>Brewery Agencies</a>
             </Categories>
-            <Categories >
-              <a onClick={() => handleFilter(WasteValues)}>Waste Managt. & Recycling </a>
+            <Categories>
+              <a onClick={() => handleFilter(WasteValues)}>
+                Waste Managt. & Recycling{" "}
+              </a>
             </Categories>
             <Categories>
-              <a onClick={() => handleFilter(SecurityValues)}>Security Services </a>
+              <a onClick={() => handleFilter(SecurityValues)}>
+                Security Services{" "}
+              </a>
             </Categories>
             <Categories>
-              <a onClick={() => handleFilter(SuppliesValues)}>Equipment Supplies</a>
+              <a onClick={() => handleFilter(SuppliesValues)}>
+                Equipment Supplies
+              </a>
             </Categories>
             <Categories>
-              <a onClick={() => handleFilter(ConstValues)}>Construction Services</a>
+              <a onClick={() => handleFilter(ConstValues)}>
+                Construction Services
+              </a>
             </Categories>
             <Categories>
-              <a onClick={() => handleFilter(InsuranceValues)}>Insurance Services</a>
+              <a onClick={() => handleFilter(InsuranceValues)}>
+                Insurance Services
+              </a>
             </Categories>
           </div>
           <div className=" max-width-container px-5 mt-5">

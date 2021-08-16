@@ -52,7 +52,7 @@ const onSearch = async value => {
 
   return (
     <div className="">
-   <div className="search-box">
+   <div className="searchBox-content">
    <div className="list-header container px-5 pt-5 pb-3">
         <div className="d-flex justify-content-between align-items-center">
           <p>
@@ -69,7 +69,7 @@ const onSearch = async value => {
       </div>
       <div className="row">
      <div className="container px-5 businessSearch">
-     <Search placeholder="input search text" onSearch={onSearch} style={{ width: '100%' }} />
+     <Search placeholder="Enter Company`s name" onSearch={onSearch} style={{ width: '100%' }} />
      </div>
       </div>
    </div>

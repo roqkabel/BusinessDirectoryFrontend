@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { GoogleMap, InfoWindow, LoadScript, Marker } from '@react-google-maps/api';
+import React, { useEffect, useState } from 'react'
+import { GoogleMap, InfoWindow, LoadScript, Marker, google } from '@react-google-maps/api';
 import { GOOGLE_MAP_API_KEY } from '@/constants/global';
 import Link from 'next/link';
 import { DIRECTORIES_PAGE } from '@/constants/routes';
@@ -16,13 +16,14 @@ const center = {
 };
 
 const defaultOptions = {
-  scrollwheel: true,
+  scrollwheel: false,
   fullscreenControl: false,
   mapTypeControl: false,
   panControl: false,
   streetViewControl: true,
   zoomControl: "true",
   gestureHandling: "greedy",
+  styles: MapStyle
 };
 
 
@@ -34,14 +35,33 @@ const MapComponent = (props) => {
     return props.currentIndex == index;
   };
 
+
+
+
+const setMapSize = (index) => {
+
+
+  try {
+
+
   
 
+    if(typeof window != 'undefined' && index != null){
+          return new window.google.maps.Size( getSize(index),getSize(index))
+    }
+    return null
+  } catch (error) {
+    console.log(error)
+  }
+
+  
+}
 
   const getSize = (index) => (checkIsIndex(index) == true ? 70 : 40);
 
   return (
     <LoadScript
-      googleMapsApiKey={`${GOOGLE_MAP_API_KEY}`}
+      googleMapsApiKey={`${process.env.googleApisKey}`}
     >
       <GoogleMap
         mapContainerStyle={containerStyle}
@@ -67,13 +87,11 @@ const MapComponent = (props) => {
                 setSelectedCompany(data);
               }}
               animation={2}
-              // icon={{
-              //   url: "https://img.icons8.com/glyph-neue/64/000000/marker.png",
-              //   scaledSize: new window.google.maps.Size(
-              //     getSize(index),
-              //     getSize(index)
-              //   ),
-              // }}
+              icon={{
+                url: "/assets/marker.png",
+
+                scaledSize:setMapSize(index)
+              }}
             />
           );
         })}
