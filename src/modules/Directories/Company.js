@@ -27,37 +27,41 @@ import { BiPhoneCall } from "react-icons/bi";
 import Reviews from "./components/Reviews";
 import DetailsSidebar from "./components/DetailsSidebar";
 import CommentComponent from "./components/Comment";
+import { Spin } from 'antd';
+import { useData } from "../../hooks/useDetails";
 
 const Company = () => {
-  const [companyDetails, setCompanyDetails] = useState(null);
-  const ratingChanged = (newRating) => {
-    console.log(newRating);
-  };
+ 
 
   const router = useRouter();
 
   const placeId = router.query.id;
 
-  const getDetails = async (url) => {
-    try {
-      const res = await axios.get(url);
-      return setCompanyDetails(res.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const { details, isLoading, isError } = useData(placeId)
 
-  useEffect(() => {
-    getDetails(
-      `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&key=${process.env.googleApisKey}`
-    );
-  }, [placeId]);
+  // const getDetails = async (url) => {
+  //   try {
+  //     const res = await axios.get(url);
+  //     return setdetails(res.data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  if (isLoading) return <Spin size="large" />;
+  if (isError) return <div>Error</div>;
+
+  console.log(details)
+
+  // useEffect(() => {
+    
+  // }, [placeId]);
 
   //    Marker
   const MarkerContent = () => {
     const position = {
-      lat: companyDetails?.result?.geometry.location.lat,
-      lng: companyDetails?.result?.geometry.location.lng,
+      lat: details?.result?.geometry.location.lat,
+      lng: details?.result?.geometry.location.lng,
     };
 
     return (
@@ -85,52 +89,52 @@ const Company = () => {
         </section>
         <section className="details container">
           <div className="info-container">
-            <h1>{companyDetails?.result?.name}</h1>
+            <h1>{details?.result?.name}</h1>
             <div className="d-flex align-items-center">
               <p>
                 <span>
-                  {companyDetails?.result?.rating
-                    ? companyDetails?.result?.rating
+                  {details?.result?.rating
+                    ? details?.result?.rating
                     : "0"}
                 </span>{" "}
                 Rating
               </p>
               <h5 className="ml-3">
                 <AiOutlineExclamationCircle /> User Ratings Total:{" "}
-                {companyDetails?.result?.user_ratings_total
-                  ? companyDetails?.result?.user_ratings_total
+                {details?.result?.user_ratings_total
+                  ? details?.result?.user_ratings_total
                   : "0"}
               </h5>
               <p className="ml-3">
                 <AiFillSafetyCertificate /> Category:{" "}
-                {companyDetails?.result?.types.toString()}
+                {details?.result?.types.toString()}
               </p>
             </div>
             <div className=" mt-2">
               <h5>
                 <FaAddressCard style={{ fontSize: 20 }} /> Address:{" "}
-                {companyDetails?.result?.formatted_address}
+                {details?.result?.formatted_address}
               </h5>
               {/* <h5 className="ml-3">
-                <FaMapMarkerAlt /> Vicinity: {companyDetails?.result?.vicinity}
+                <FaMapMarkerAlt /> Vicinity: {details?.result?.vicinity}
               </h5> */}
             </div>
             <div>
               <h5 className="mt-1">
                 <FiPhoneCall /> Phone #:{" "}
-                {companyDetails?.result?.formatted_phone_number}
+                {details?.result?.formatted_phone_number}
               </h5>
               <h5 className="mt-1">
                 <BiPhoneCall />
                 Int. Phone #:{" "}
-                {companyDetails?.result?.international_phone_number}
+                {details?.result?.international_phone_number}
               </h5>
             </div>
             <div>
               {/* <ReactStars
                 count={5}
                 // onChange={ratingChanged}
-                value={companyDetails?.result?.rating}
+                value={details?.result?.rating}
                 size={30}
                 isHalf={true}
                 emptyIcon={<i className="far fa-star"></i>}
@@ -141,10 +145,10 @@ const Company = () => {
               /> */}
             </div>
             <div className="mt-3">
-              {companyDetails?.result?.opening_hours.open_now && (
+              {details?.result?.opening_hours.open_now && (
                 <span id="open_now">Open Now</span>
               )}
-              {companyDetails?.result?.opening_hours.open_now == false ? (
+              {details?.result?.opening_hours.open_now == false ? (
                 <span id="close_now">Closed</span>
               ) : (
                 ""
@@ -226,8 +230,8 @@ const Company = () => {
                     <div>
                       <h2>Working Hours</h2>
                       {
-                        //   console.log(companyDetails?.result?.opening_hours.periods)
-                        companyDetails?.result?.opening_hours.weekday_text.map(
+                        //   console.log(details?.result?.opening_hours.periods)
+                        details?.result?.opening_hours.weekday_text.map(
                           (item) => (
                             <li>{item}</li>
                           )
@@ -239,8 +243,8 @@ const Company = () => {
                     <div>
                       <h2>Recommended Reviews</h2>
                       <div>
-                        {companyDetails?.result?.reviews ? (
-                          <Reviews data={companyDetails} />
+                        {details?.result?.reviews ? (
+                          <Reviews data={details} />
                         ) : (
                           <h5>No Reviews</h5>
                         )}
@@ -269,7 +273,7 @@ const Company = () => {
             </div>
           </div>
           <div className="mini-sidebar">
-            <DetailsSidebar data={companyDetails} />
+            <DetailsSidebar data={details} />
           </div>
         </section>
       </main>

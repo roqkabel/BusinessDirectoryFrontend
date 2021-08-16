@@ -1,23 +1,14 @@
+import useSWR from 'swr'
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
 
-export const useGetDirections = ({ originId, destinationId}) => {
-    const [data, setData] = useState({})
+const fetcher = url => axios.get(url).then(res => res.data)
 
-
-   try {
-       useEffect(() => {
-           axios.get(`https://maps.googleapis.com/maps/api/directions/json?origin=${originId}&destination=${destinationId}&key=${process.env.googleApisKey}`)
-                .then((res) => {
-                    setData(res?.data?.routes[0]?.legs[0])
-                })
-       }, [originId, destinationId])
-   } catch (error) {
-       console.log(error)
-   }
-   return data
-}
-
-
-
-// 
+export function useGetDirections ({ originId, destinationId }) {
+    const { data, error } = useSWR(`https://maps.googleapis.com/maps/api/directions/json?origin=${originId}&destination=${destinationId}&key=${process.env.googleApisKey}`, fetcher)
+  
+    return {
+      data: data?.routes[0]?.legs[0],
+      isLoading: !error && !data,
+      isError: error
+    }
+  }

@@ -7,6 +7,7 @@ import { AiOutlineCar, AiOutlineMail } from "react-icons/ai";
 import { MdTimeline } from "react-icons/md";
 import { IoMdTimer } from "react-icons/io";
 import { useGetDirections } from "src/hooks/useGetDirections";
+import { Spin } from 'antd';
 import { useEffect, useState } from "react";
 import { BsArrow90DegRight } from "react-icons/bs";
 
@@ -99,7 +100,7 @@ const DirectionCardWrapper = styled.div`
   }
 `;
 
-const GetInfo = ({ id, info, distance, duration }) => (
+const GetInfo = ({  info, distance, duration }) => (
   <div>
     <div className="d-flex align-items-center">
       <span className="mr-2">
@@ -118,16 +119,20 @@ const GetInfo = ({ id, info, distance, duration }) => (
 );
 
 export const GetDirectionCard = (props) => {
-  const [data, setData] = useState("");
-  const getDirections = useGetDirections({
+  // const [data, setData] = useState("");
+  const { data, isLoading, isError } = useGetDirections({
     originId: props?.origin?.lat + "," + props?.origin?.lng,
     destinationId: props?.directions?.geometry?.location.lat + "," + props?.directions?.geometry?.location.lng,
   });
+  
 
-  useEffect(() => {
-    setData(getDirections);
-  }, [getDirections]);
-  console.log(props);
+  // useEffect(() => {
+  //   setData(getDirections);
+  // }, [getDirections]);
+  // console.log(data);
+
+  if (isLoading) return ( <Spin size="large" />)
+  if (isError) return (<div>Error</div>)
   return (
     <DirectionCardWrapper>
       <div className="pt-3">

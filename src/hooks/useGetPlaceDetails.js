@@ -1,22 +1,15 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import useSWR from 'swr'
+import axios from 'axios'
 
-export default function useGetPlaceDirection({ place_id, apiKey }) {
-  const [data, setData] = useState({});
+const fetcher = url => axios.get(url).then(res => res.data)
 
-  try {
-    useEffect(() => {
-      axios
-        .get(
-          `https://maps.googleapis.com/maps/api/place/details/json?place_id=${place_id}&key=${apiKey}`
-        )
-        .then((res) => {
-          setData(res.data.result);
-        });
-    }, [place_id]);
-  } catch (error) {
-    console.log(error);
+export function useGetPlaceDetails ({ place_id, apiKey }) {
+    const { data, error } = useSWR(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${place_id}&key=${apiKey}`, fetcher)
+  
+    return {
+      data: data?.result,
+      isLoading: !error && !data,
+      isError: error
+    }
   }
 
-  return data;
-}
